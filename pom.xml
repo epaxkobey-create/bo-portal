@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>RSG</groupId>
+        <artifactId>pom-parent</artifactId>
+        <version>1.0</version>
+        <relativePath>./pom-parent</relativePath>
+    </parent>
+
+    <!--    <groupId>RSG</groupId>-->
+    <artifactId>CY</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <java.lang.level>21</java.lang.level>
+        <jdk.version>21</jdk.version>
+        <java.version>21</java.version>
+        <!--	<maven.compiler.release>8</maven.compiler.release>-->
+        <log4j2.version>2.25.0</log4j2.version>
+        <quarts.version>2.5.2</quarts.version>
+        <tomcat.version>10.1.16</tomcat.version>
+        <maven.war.version>3.4.0</maven.war.version>
+        <maven.test.skip>true</maven.test.skip>
+        <skip.copy.robots.txt>true</skip.copy.robots.txt>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <!--        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>-->
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.13.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>CY</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.0</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <compilerArgs>
+                        <arg>-Xlint:unchecked,deprecation</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- for UAT -->
+                                <mkdir dir="${project.build.directory}/robotsTxt"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.codehaus.mojo</groupId>-->
+            <!--                <artifactId>exec-maven-plugin</artifactId>-->
+            <!--                <version>3.5.0</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>copy robots_disallow_all.txt</id>-->
+            <!--                        <phase>prepare-package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>exec</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <skip>${skip.copy.robots.txt}</skip>-->
+            <!--                            &lt;!&ndash; for local win &ndash;&gt;-->
+            <!--                            &lt;!&ndash;	<executable>replace_robots.txt.bat</executable>		&ndash;&gt;-->
+            <!--                            &lt;!&ndash; for jenkins linux &ndash;&gt;-->
+            <!--                            <executable>replace_robots.txt.sh</executable>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.version}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+                <executions>
+                    <!-- Execute before packaging, after packaging contains files that have been executed -->
+                    <execution>
+                        <id>prepare-war</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <!-- Replace before packing -->
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${project.build.directory}</basedir>
+                    <includes>
+                        <include>**/*.jsp</include>
+                    </includes>
+                    <replacements>
+                        <replacement>
+                            <token>\.js\?v="</token>
+                            <value>.js?v=${maven.build.timestamp}"</value>
+                        </replacement>
+                        <replacement>
+                            <token>\.js\?v='</token>
+                            <value>.js?v=${maven.build.timestamp}'</value>
+                        </replacement>
+                        <replacement>
+                            <token>\.css\?v="</token>
+                            <value>.css?v=${maven.build.timestamp}"</value>
+                        </replacement>
+                        <replacement>
+                            <token>\.css\?v='</token>
+                            <value>.css?v=${maven.build.timestamp}'</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>apache-snapshot</id>
+            <name>Apache Snapshot Repository</name>
+            <url>https://repository.apache.org/content/groups/snapshots/</url>
+        </repository>
+        <repository>
+            <id>in-project</id>
+            <name>In Project Repo</name>
+            <url>file://${project.basedir}/lib</url>
+        </repository>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.13.0</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.nv.module.middle-layer.cache</groupId>-->
+        <!--            <artifactId>client</artifactId>-->
+        <!--            <version>1.0.4</version>-->
+        <!--        </dependency>-->
+
+        <!-- quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quarts.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>${quarts.version}</version>
+        </dependency>
+        <!-- for quartz -->
+        <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <!-- tomcat -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- tomcat jdbc pool -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5 -->
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>5.4.3</version>
+        </dependency>
+
+        <!-- apache commons -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.11.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.5.0</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.commons</groupId>-->
+        <!--            <artifactId>commons-fileupload2-jakarta</artifactId>-->
+        <!--            <version>2.0.0-M1</version>-->
+        <!--        </dependency>-->
+        <!-- 判斷OS DEVICE 跟 USER AGENT用 -->
+        <dependency>
+            <groupId>nl.basjes.parse.useragent</groupId>
+            <artifactId>yauaa</artifactId>
+            <version>7.31.0</version>
+        </dependency>
+
+        <!-- LOG4J2 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.17</version>
+        </dependency>
+
+        <!-- ip to location -->
+        <dependency>
+            <groupId>com.neutec</groupId>
+            <artifactId>ip2locationNew</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- oracle jdbc -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+            <version>23.7.0.25.01</version>
+        </dependency>
+
+        <!-- json -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neutec</groupId>
+            <artifactId>json</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- captcha -->
+        <dependency>
+            <groupId>com.liferay</groupId>
+            <artifactId>nl.captcha.simplecaptcha</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+
+        <!-- Excel -->
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+
+        <!-- Json Web Token -->
+        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.5.0</version>
+        </dependency>
+
+        <!-- QR Code -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+
+        <!-- Java Mail -->
+        <!-- https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
+        <dependency>
+            <groupId>jakarta.mail</groupId>
+            <artifactId>jakarta.mail-api</artifactId>
+            <version>2.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.angus</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>2.0.4</version>
+            <scope>runtime</scope>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/de.svenkubiak/jBCrypt -->
+        <!--        <dependency>-->
+        <!--            <groupId>de.svenkubiak</groupId>-->
+        <!--            <artifactId>jBCrypt</artifactId>-->
+        <!--            <version>0.4.3</version>-->
+        <!--        </dependency>-->
+
+        <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.jsoup</groupId>-->
+        <!--            <artifactId>jsoup</artifactId>-->
+        <!--            <version>1.18.3</version>-->
+        <!--        </dependency>-->
+
+        <!--SFTP-->
+        <!-- https://mvnrepository.com/artifact/com.github.mwiede/jsch -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.mwiede</groupId>-->
+        <!--            <artifactId>jsch</artifactId>-->
+        <!--            <version>0.2.24</version>-->
+        <!--        </dependency>-->
+
+        <!-- AES BC encrypt/decrypt -->
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.80</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk18on -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk18on</artifactId>
+            <version>1.80</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.maven-replacer-plugin/replacer -->
+        <dependency>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>replacer</artifactId>
+            <version>1.5.3</version>
+            <scope>provided</scope><!-- provided ? -->
+        </dependency>
+
+        <!--
+        dependency of maven-replacer-plugin
+        for fix java: Supported source version 'RELEASE_5' from annotation processor
+        'org.sonatype.guice.bean.scanners.index.QualifiedIndexAPT6' less than -source '1.8' -->
+        <dependency>
+            <groupId>org.sonatype.sisu</groupId>
+            <artifactId>sisu-inject-plexus</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <!--telegram bot api-->
+        <!-- https://mvnrepository.com/artifact/com.github.pengrad/java-telegram-bot-api -->
+        <dependency>
+            <groupId>com.github.pengrad</groupId>
+            <artifactId>java-telegram-bot-api</artifactId>
+            <version>8.3.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.lingala.zip4j/zip4j -->
+        <dependency>
+            <groupId>net.lingala.zip4j</groupId>
+            <artifactId>zip4j</artifactId>
+            <version>2.11.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.neutec</groupId>
+            <artifactId>report</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>77.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>4.12.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp-urlconnection -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp-urlconnection</artifactId>
+            <version>4.12.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.12.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.3.232</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.10.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>3.1.8</version>
+        </dependency>
+
+		<dependency>
+			<groupId>jakarta.websocket</groupId>
+			<artifactId>jakarta.websocket-api</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.websocket</groupId>
+			<artifactId>jakarta.websocket-client-api</artifactId>
+			<version>2.1.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- ✅ WebSocket Client Implementation for Testing -->
+		<dependency>
+			<groupId>org.glassfish.tyrus.bundles</groupId>
+			<artifactId>tyrus-standalone-client</artifactId>
+			<version>2.1.5</version>
+			<scope>test</scope>
+		</dependency>
+
+        <!-- Cucumber BDD -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.33.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>7.33.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>7.33.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>CY</id>
+            <properties>
+                <rp.build.warname>CY</rp.build.warname>
+                <config.folder>CY</config.folder>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>in-project</id>
+                    <name>In Project Repo</name>
+                    <url>file://${project.basedir}/lib</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <build>
+                <plugins>
+                    <!-- JSP Compilation Plugin -->
+                    <plugin>
+                        <groupId>io.leonard.maven.plugins</groupId>
+                        <artifactId>jspc-maven-plugin</artifactId>
+                        <version>4.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>jspc</id>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <generatedClasses>${project.build.directory}/jspc</generatedClasses>
+                            <compilerClass>org.apache.jasper.compiler.ParallelJDTCompiler</compilerClass>
+                            <excludes>
+                                <param>**/include/**</param>
+                            </excludes>
+                            <threads>4</threads>
+                        </configuration>
+                    </plugin>
+
+                    <!-- JavaScript Minification Plugin -->
+                    <plugin>
+                        <groupId>com.github.blutorange</groupId>
+                        <artifactId>closure-compiler-maven-plugin</artifactId>
+                        <version>2.32.0</version>
+                        <executions>
+                            <execution>
+                                <id>default-minify</id>
+                                <!-- defaults phase 'process-resources' -->
+                                <phase>prepare-package</phase>
+                                <configuration>
+
+                                    <encoding>UTF-8</encoding>
+                                    <baseSourceDir>${basedir}/src/main/webapp</baseSourceDir>
+                                    <baseTargetDir>${project.build.directory}</baseTargetDir>
+                                    <sourceDir>js</sourceDir>
+                                    <targetDir>compressJs</targetDir>
+                                    <outputFilename>#{path}/#{basename}.#{extension}</outputFilename>
+
+                                    <skipMerge>true</skipMerge>
+                                    <closureEmitUseStrict>false</closureEmitUseStrict>
+                                    <closureStrictModeInput>false</closureStrictModeInput>
+                                    <!-- Default: ECMASCRIPT_2018 -->
+                                    <closureLanguageIn>ECMASCRIPT_2020</closureLanguageIn><!-- ECMAScript2015 is ES6 -->
+                                    <closureLanguageOut>NO_TRANSPILE</closureLanguageOut>
+
+                                    <includes>
+                                        <include>**/*.js</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>plugins/**/*.js</exclude>
+                                        <exclude>operator/plugins/**/*.js</exclude>
+                                        <exclude>**/jquery*</exclude>
+                                        <exclude>**/*.css</exclude>
+                                        <exclude>**/*.min.js</exclude>
+                                    </excludes>
+
+                                </configuration>
+                                <goals>
+                                    <goal>minify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Unit Test Plugin -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.5.2</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.junit.platform</groupId>
+                                <artifactId>junit-platform-launcher</artifactId>
+                                <version>1.12.2</version>
+
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <forkCount>1</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <systemPropertyVariables>
+                                <test.environment>CY</test.environment>
+                            </systemPropertyVariables>
+							<excludedGroups>integration</excludedGroups>  <!-- ← 排除 integration 标签 -->
+                        </configuration>
+                    </plugin>
+
+                    <!-- WAR Plugin -->
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>${maven.war.version}</version>
+                        <configuration>
+                            <archive>
+                                <addMavenDescriptor>false</addMavenDescriptor>
+                                <manifest>
+                                    <addDefaultImplementationEntries>false</addDefaultImplementationEntries>
+                                </manifest>
+                                <manifestEntries>
+                                    <Git-Revision>${git.commit.id.full}</Git-Revision>
+                                </manifestEntries>
+                            </archive>
+                            <packagingExcludes>
+                                upload/,
+                                download/,
+                                **/*Test*.*,
+                                **/*.apk,
+                                **/*.exe,
+                                **/*.sql
+                            </packagingExcludes>
+                            <warName>ROOT</warName>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>default-war</id>
+                                <configuration>
+                                    <webResources>
+                                        <resource>
+                                            <directory>${project.build.directory}/robotsTxt</directory>
+                                            <targetPath>page/site</targetPath>
+                                            <includes>
+                                                <include>**/*.txt</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.build.directory}/compressJs</directory>
+                                            <targetPath>js</targetPath>
+                                            <includes>
+                                                <include>**/*</include>
+                                            </includes>
+                                        </resource>
+                                    </webResources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jenkins-test</id>
+            <properties>
+                <rp.build.warname>test</rp.build.warname>
+                <config.folder>test</config.folder>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- https://maven.apache.org/surefire/maven-surefire-plugin/dependency-info.html -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.5.2</version>
+                        <configuration>
+                            <!-- 限制測試爲單一執行序，一個一個單元進行測試 -->
+                            <forkCount>1</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <systemPropertyVariables>
+                                <test.environment>jenkins</test.environment>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

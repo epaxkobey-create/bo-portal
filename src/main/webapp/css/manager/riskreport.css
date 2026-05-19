@@ -1,0 +1,145 @@
+#thisMonthCheckResult h3,
+#lastMonthCheckResult h3,
+#lifeTimeCheckResult h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+#thisMonthCheckResult .month-result-wrap,
+#lastMonthCheckResult .month-result-wrap,
+#lifeTimeCheckResult .month-result-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 13px;
+}
+
+#thisMonthCheckResult .month-result-box,
+#lastMonthCheckResult .month-result-box,
+#lifeTimeCheckResult .month-result-box {
+  flex: 0 0 auto;
+  min-width: 170px;
+  border: 1px solid #D4D3D4;
+  box-shadow: 0 2px 2px 1px rgba(45, 45, 45, 0.1), 0 4px 4px 1px rgba(45, 45, 45, 0.1), 0 8px 8px 1px rgba(45, 45, 45, 0.1);
+}
+
+#thisMonthCheckResult .month-result-box h5,
+#lastMonthCheckResult .month-result-box h5,
+#lifeTimeCheckResult .month-result-box h5 {
+  margin: 0;
+  padding: 8px;
+  border-bottom: 1px solid #D4D3D4;
+  background-color: #F8F8F8;
+  font-weight: bold;
+  text-align: center;
+}
+
+#thisMonthCheckResult .month-result-box span,
+#lastMonthCheckResult .month-result-box span,
+#lifeTimeCheckResult .month-result-box span {
+  display: block;
+  padding: 8px;
+  background-color: #FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#thisMonthCheckResult .month-result-box.income, #thisMonthCheckResult .month-result-box.outlay,
+#lastMonthCheckResult .month-result-box.income,
+#lastMonthCheckResult .month-result-box.outlay,
+#lifeTimeCheckResult .month-result-box.income,
+#lifeTimeCheckResult .month-result-box.outlay {
+  border: 1px solid #49899b;
+}
+
+#thisMonthCheckResult .month-result-box.income h5, #thisMonthCheckResult .month-result-box.outlay h5,
+#lastMonthCheckResult .month-result-box.income h5,
+#lastMonthCheckResult .month-result-box.outlay h5,
+#lifeTimeCheckResult .month-result-box.income h5,
+#lifeTimeCheckResult .month-result-box.outlay h5 {
+  background-color: #62A3B5;
+  color: #FFFFFF;
+}
+
+#thisMonthCheckResult .month-result-box.netWorth,
+#lastMonthCheckResult .month-result-box.netWorth,
+#lifeTimeCheckResult .month-result-box.netWorth {
+  border: 1px solid #284c56;
+}
+
+#thisMonthCheckResult .month-result-box.netWorth h5,
+#lastMonthCheckResult .month-result-box.netWorth h5,
+#lifeTimeCheckResult .month-result-box.netWorth h5 {
+  background-color: #396b78;
+  color: #FFFFFF;
+}
+
+#thisMonthCheckResult .month-result-box.balance,
+#lastMonthCheckResult .month-result-box.balance,
+#lifeTimeCheckResult .month-result-box.balance {
+  border: 1px solid #374d61;
+}
+
+#thisMonthCheckResult .month-result-box.balance h5,
+#lastMonthCheckResult .month-result-box.balance h5,
+#lifeTimeCheckResult .month-result-box.balance h5 {
+  background-color: #4A6781;
+  color: #FFFFFF;
+}
+
+#thisMonthCheckResult .month-result-box.result,
+#lastMonthCheckResult .month-result-box.result,
+#lifeTimeCheckResult .month-result-box.result {
+  border: 1px solid #70934c;
+}
+
+#thisMonthCheckResult .month-result-box.result h5,
+#lastMonthCheckResult .month-result-box.result h5,
+#lifeTimeCheckResult .month-result-box.result h5 {
+  background-color: #89AF63;
+  color: #FFFFFF;
+}
+
+#thisMonthCheckResult .month-result-box.result.warning,
+#lastMonthCheckResult .month-result-box.result.warning,
+#lifeTimeCheckResult .month-result-box.result.warning {
+  border: 1px solid #d12826;
+}
+
+#thisMonthCheckResult .month-result-box.result.warning h5,
+#lastMonthCheckResult .month-result-box.result.warning h5,
+#lifeTimeCheckResult .month-result-box.result.warning h5 {
+  background-color: #DE4D4C;
+  color: #FFFFFF;
+}
+
+#thisMonthCheckResult i,
+#lastMonthCheckResult i,
+#lifeTimeCheckResult i {
+  flex: 0 0 auto;
+  min-width: 20px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 修改 Hold / Processing color */
+.label.label-hold {
+  background-color: #A76750;
+}
+
+.label.label-processing {
+  background-color: #8e6da4;
+}
+
+.label.label-revert {
+  background-color: #F06939;
+}
+
+.label.label-await {
+  background-color: #A77E88;
+}

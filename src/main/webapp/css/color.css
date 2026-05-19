@@ -1,0 +1,50 @@
+/******************************************************************TEXT COLOR START******************************************************************/
+.head-topbar strong.address .fa, .head-topbar a.email .fa, .head-topbar strong.phone .fa, #nav li:hover > a, #nav li.active a, .intro-section strong.number, .theme-style-1 h4, .bottom-row .text-box strong.name, .testo-social li a:hover, .call-action .action-box strong.phone, .call-action .action-box a .fa, .theme-style-1 h4 a, .footer-section-1 .footer-box strong.number, .footer-section-1 .footer-box ul li a .fa, .footer-section-1 .footer-box span, .footer-section-1 .footer-box b, .head-topbar a.login .fa, #home-banner-2 .caption a.btn-style-3, .excellence-section .nav-tabs > li a .fa, .theme-style-1 h2 span, .tab-box-2-style .box .text-box a, .forms-box strong.title, .forms-box .inner-box ul li .fa, .theme-style-1 .product-style-2 .outer-box .text-box h3, .call-action-2.call-action .action-box a.help .fa, .latest-news-2 span.date, .latest-news-2.latest-news .holder .text-box strong a, .footer-section-1 .footer-box address ul li .fa, #footer .footer-section-1 .footer-2-social ul li:hover a, .head-3-social ul li a:hover, .header-3 a.email .fa, .header-3 span.num .fa, .product-text-box .inner-box:hover h3, .happy-client .holder .text-box blockquote strong.name, .our-professionals .team-box .text-box ul li a:hover, .call-action-3.call-action .action-box a, .map-section address ul li .fa, .footer-section-1 .footer-box .recent-post .text-box span.date, .error-page strong.title:before, .post-box .text-box strong a, .theme-style-1 .post-box .text-box p span, .faq-page div.content_cp_accor ul, .faq-page div.content_cp_accor p span, .faq-page .accordion-open span i:before, .insurance-box .text-box p span, .slider-caption ul li a {
+  color: #f16192;
+}
+
+/******************************************************************TEXT COLOR END******************************************************************/
+
+/*TEXT COLOR 2*/
+.theme-style-1 h2, .intro-section span, .theme-style-1 h3, a.btn-style-3 .fa, .testimonials-style-1 .owl-next:hover:before, .testimonials-style-1 .owl-prev:hover:before, .latest-news .holder .text-box strong a, .subscribe-newsletter strong.title, .excellence-section .nav-tabs > li a, .tab-box-1-style .left-box form strong.title, .tab-box-1-style .right-box strong.title, .tab-box-2-style .box .text-box a:hover, .product-style-2 .outer-box:hover .text-box h3, .latest-news-2 .tags-row a, .call-action.call-action-3 .action-box h2, .error-page strong.title, .error-page span, .theme-style-1 .post-box p a, .pagination-box .pager li > a:hover, .post-categories h4, .post-categories ul li:hover a, .latest-update .text-box span, .theme-style-1 .post-box .text-box p i, .theme-style-1 .post-box .text-box strong.alpha, .latest-news-2 .bs-example .media a, .faq-page .accordion-open span .fa, .faq-page .accordion-close span, .faq-page .accordion-open, .insurance-box .text-box p span, .plans-box ul li:hover a span, .services-widget ul li:hover a, .downloads ul li:hover .fa, .qoute-tabs .nav-tabs > li.active > a, .qoute-tabs .nav-tabs > li.active > a:hover, .qoute-tabs .nav-tabs > li.active > a:focus, .qoute-tabs .nav-tabs > li > a:hover, .qoute-tabs .nav-tabs > li.active:before, .price-range-row input[type="text"], .why-choose-us .owl-prev:hover:before, .why-choose-us .owl-next:hover:before {
+  color: #5e5bb6;
+}
+
+/*TEXT COLOR 2*/
+
+
+/***********************************************************BACKGROUND COLOR START***********************************************************/
+a.btn-style-1, .theme-style-1 h2:after, .key-success .box .round-box:before, .key-success .box .round-box:after, .key-success .box .round-box:hover, a.btn-style-2:before, a.btn-style-3:before, .latest-news .holder .thumb .caption a:hover, .subscribe-newsletter .holder input[type="submit"], .head-2-social ul li a:hover, .tab-box-1-style .left-box form input[type="submit"], .tab-box-2-style .box:hover i.icon-1, .tab-box-2-style .box:hover i.icon-2, .tab-box-2-style .box:hover i.icon-3, .tab-box-2-style .box:hover i.icon-4, .product-style-2 .outer-box:hover .round-box, .find-agent .holder form input[type="submit"]:hover, .latest-news-2.latest-news .holder .text-box a.btn-style-1:hover:before, .footer-section-1 .footer-box form button[type="submit"], .product-style-3 .round i.icon-1:hover, .product-style-3 .round i.icon-1:hover, .product-style-3 .round i.icon-2:hover, .product-style-3 .round i.icon-3:hover, .product-style-3 .round i.icon-4:hover, .happy-client .owl-next:hover, .happy-client .owl-prev:hover, .footer-social-3 ul li a:hover, .map-form form input[type="submit"]:hover, .promo-frame .caption span.new, .sidebar .box h4:after, .promo-2:before, .tags ul li a:hover, .comment-box form input[type="submit"]:hover, .price-range-row .ui-state-default:before, .information-form input[type="submit"]:hover, .map-section address strong.title:after, .navigation-section .navbar-toggle {
+  background-color: #f16192;
+}
+
+/*BACKGROUND COLOR 2*/
+.key-success, .accordion-open span, .accordion-close span, a.btn-style-2, .call-action, .latest-news .owl-next:hover, .latest-news .owl-prev:hover, .subscribe-newsletter .holder input[type="submit"]:hover, #home-banner-2 .caption a.btn-style-3:before, .excellence-section .nav-tabs > li.active > a, .excellence-section .nav-tabs > li.active > a:hover, .excellence-section .nav-tabs > li.active > a:focus, .excellence-section .nav > li > a:hover, .excellence-section .nav > li > a:focus, .tab-box-1-style .left-box form input[type="submit"]:hover, .product-style-2, .find-agent .holder form input[type="submit"], .intro-style-2 .intro-detail-box .progress-bar, .latest-news-2.latest-news .holder .text-box a.btn-style-1, .footer-section-1 .footer-box form button[type="submit"]:hover, .product-style-3, .why-choose-us, .subscribe-3, #inner-banner .breadcrumb, .error-page form input[type="submit"], .map-form form input[type="submit"], .promo-frame .caption, .post-categories ul li:hover span, .theme-style-1 .post-box .text-box p span.highlight, .comment-box form input[type="submit"], .heading-style-2, .price-range-row .ui-slider .ui-slider-range, .information-form input[type="submit"], .navigation-section .navbar-inverse .navbar-toggle:hover, .navigation-section .navbar-inverse .navbar-toggle:focus {
+  background-color: #5e5bb6;
+}
+
+/*BACKGROUND COLOR 2*/
+
+/***********************************************************BACKGROUND COLOR END***********************************************************/
+
+
+/**********************************************************************BORDER COLOR START**********************************************************************/
+#home-banner .owl-buttons:before, .key-success .box .round-box, .testimonials-style-1 .owl-next:hover, .testimonials-style-1 .owl-prev:hover, #home-banner-2 .caption a.btn-style-3, .choose-products ul li:hover, .choose-products ul li.active, .product-style-2 .outer-box:hover .round-box:before, .product-style-2 a.btn-style-3, .product-style-3 .round i.icon-1:hover:before, .product-style-3 .round i.icon-2:hover:before, .product-style-3 .round i.icon-3:hover:before, .product-style-3 .round i.icon-4:hover:before, .qoute-tabs .frame:hover:before, .navigation-section .navbar-inverse .navbar-toggle {
+  border-color: #f16192;
+}
+
+/*BORDER COLOR 2*/
+a.btn-style-3, #home-banner-2 .caption a.btn-style-3:hover, .intro-style-2 .intro-detail-box .progress-bar span, .contact-map-box .caption, .address-info-row .address-box i, .post-categories ul li span, .price-range-row .ui-state-default, .price-range-row .ui-widget-content .ui-state-default, .price-range-row .ui-widget-header .ui-state-default, .qoute-tabs .frame:before {
+  border-color: #5e5bb6;
+}
+
+.excellence-section .nav-tabs > li.active:before {
+  border-color: #5e5bb6 transparent transparent transparent;
+}
+
+.contact-map-box .caption:before {
+  border-color: transparent transparent transparent #5e5bb6;
+}
+
+/*BORDER COLOR 2*/
+/**********************************************************************BORDER COLOR END**********************************************************************/

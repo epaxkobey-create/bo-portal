@@ -1,0 +1,16 @@
+.valign {
+  vertical-align: middle !important;
+}
+
+.ui-datepicker {
+  z-index: 2000 !important;
+}
+
+.underlink {
+  text-decoration: none !important;
+}
+
+img.disableimg {
+  -webkit-filter: brightness(90%) !important;
+  filter: brightness(90%) !important;
+}

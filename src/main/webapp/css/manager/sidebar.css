@@ -1,0 +1,54 @@
+.pendingwithdrawal {
+  padding: 0;
+}
+
+.pendingwithdrawal .popover-title {
+  border-radius: 0;
+  background-color: #3969c6;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.pendingwithdrawal .popover-content {
+  padding: 10px;
+}
+
+.pendingwithdrawal .table {
+  margin-bottom: 0 !important;
+  border: 1px solid #e2e1e1;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.pendingwithdrawal .table tr {
+  cursor: pointer;
+}
+
+.pendingwithdrawal .table tr:first-child td {
+  border-top: 0;
+}
+
+.pendingwithdrawal .table tr td {
+  padding: 8px;
+  border-top: 1px dashed #dddddd;
+  vertical-align: middle;
+}
+
+.pendingwithdrawal .table tr td:nth-child(2n) {
+  text-align: right;
+}
+
+.pendingwithdrawal .table tr td span {
+  display: inline-block;
+  min-width: 27px;
+  padding: 5px;
+  background-color: #e25856;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.pendingwithdrawal .table-hover tbody tr:hover > td,
+.pendingwithdrawal .table-hover tbody tr:hover > th {
+  background-color: #edf3fb;
+}
